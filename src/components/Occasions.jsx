@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { officers } from "../data/sampleData";
+import { API_URL, authHeaders } from "../api";
 
 const DAY = 86400000;
 
@@ -86,9 +87,9 @@ export default function Occasions() {
         : `Write a short ${e.type.toLowerCase()} message for ${e.name}. Personalise it using their record, such as their field of work or a recent project.`;
 
     try {
-      const res = await fetch("http://localhost:3001/api/ask", {
+      const res = await fetch(`${API_URL}/api/ask`, {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: authHeaders(),
         body: JSON.stringify({ question, data: officer ?? {} }),
       });
       const json = await res.json();

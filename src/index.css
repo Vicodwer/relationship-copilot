@@ -528,3 +528,22 @@ button, input, textarea { font: inherit; }
 .tr-block h4, .tr-intel h4 { margin: 12px 0 4px; font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
 .tr-block ul { margin: 0; padding-left: 18px; }
 @media (max-width: 760px) { .tr-grid { grid-template-columns: 1fr; } }
+
+.assistant { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); margin-top: 16px; display: grid; gap: 12px; min-width: 0; }
+.assistant-form { display: flex; gap: 8px; align-items: center; }
+.assistant-form input { flex: 1; min-width: 0; font: inherit; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; color: var(--text); background: #fff; }
+.assistant-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: inherit; font-size: 13px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--border); background: var(--accent-soft); color: var(--accent-hover); cursor: pointer; }
+.chip:disabled { opacity: .6; cursor: default; }
+.assistant-answer { background: var(--bg); border-radius: 10px; padding: 12px; display: flex; gap: 10px; justify-content: space-between; align-items: flex-start; }
+.assistant-answer p { margin: 0; white-space: pre-wrap; }
+@media (max-width: 760px) { .assistant-form { flex-wrap: wrap; } }
+.assistant { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); margin-top: 16px; display: grid; gap: 12px; min-width: 0; }
+.assistant-form { display: flex; gap: 8px; align-items: center; }
+.assistant-form input { flex: 1; min-width: 0; font: inherit; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; color: var(--text); background: #fff; }
+.assistant-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font: inherit; font-size: 13px; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--border); background: var(--accent-soft); color: var(--accent-hover); cursor: pointer; }
+.chip:disabled { opacity: .6; cursor: default; }
+.assistant-answer { background: var(--bg); border-radius: 10px; padding: 12px; display: flex; gap: 10px; justify-content: space-between; align-items: flex-start; }
+.assistant-answer p { margin: 0; white-space: pre-wrap; }
+@media (max-width: 760px) { .assistant-form { flex-wrap: wrap; } }

@@ -1,5 +1,6 @@
 import { CalendarDays, AlertCircle, Users, Sparkles, FolderKanban, CalendarCheck } from "lucide-react";
 import { officers, meetings } from "../data/sampleData";
+import DashboardAssistant from "./DashboardAssistant";
 
 // Days from today to a date string: negative = past, positive = future
 const daysBetween = (dateStr) => (new Date(dateStr) - new Date()) / 86400000;
@@ -12,6 +13,8 @@ const greeting = () => {
 };
 
 export default function Dashboard({ onNavigate }) {
+  const nameOf = (id) => officers.find((o) => o.id === id)?.name ?? "Unknown";
+
   const thisWeek = meetings.filter((m) => {
     const d = daysBetween(m.date);
     return d >= 0 && d <= 7;
@@ -28,13 +31,28 @@ export default function Dashboard({ onNavigate }) {
     .sort((a, b) => a.date.localeCompare(b.date))
     .slice(0, 5);
 
-  const nameOf = (id) => officers.find((o) => o.id === id)?.name ?? "Unknown";
-
   const cards = [
     { label: "Meetings this week", value: thisWeek.length, icon: CalendarDays, tone: "accent" },
     { label: "Follow-ups due", value: followUpsDue.length, icon: AlertCircle, tone: "warn" },
     { label: "Not contacted in 90 days", value: notContacted.length, icon: Users, tone: "bad" },
   ];
+
+  // Only this summary is sent to the AI, not the whole dataset
+  const assistantData = {
+    today: new Date().toISOString().slice(0, 10),
+    upcomingMeetings: upcoming.map((m) => ({
+      officer: nameOf(m.officerId),
+      date: m.date,
+      purpose: m.purpose,
+      place: m.place,
+    })),
+    followUpsDue: followUpsDue.map((m) => ({
+      officer: nameOf(m.officerId),
+      followUpDate: m.followUpDate,
+      purpose: m.purpose,
+    })),
+    notContactedIn90Days: notContacted.map((o) => o.name),
+  };
 
   return (
     <>
@@ -98,6 +116,8 @@ export default function Dashboard({ onNavigate }) {
           </div>
         </section>
       </div>
+
+      <DashboardAssistant data={assistantData} />
     </>
   );
 }
